@@ -1,0 +1,30 @@
+<form [formGroup]="newUserForm">
+
+    <label for="Address">Address: </label>
+    <!-- <input id="Address" type="text" formControlName="Address" > -->
+    <input id="Address" type="text" formControlName="Address" autocomplete="yes" ngx-google-places-autocomplete
+        [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)">
+
+
+    <!-- <mat-search-google-maps-autocomplete formControlName="Address">
+    </mat-search-google-maps-autocomplete> -->
+
+    <label for="Size">Size: </label>
+    <input id="Size" type="text" formControlName="Size">
+
+    <label for="Year">Year: </label>
+    <input id="Year" type="text" formControlName="Year">
+
+    <button (click)="getUserInformation()" type="submit" [disabled]="!newUserForm.valid">Submit</button>
+
+</form>
+
+<google-map height="400px"
+            width="750px"
+            [center]="center"
+            [zoom]="zoom"
+            (mapClick)="addMarker($event)">
+  <map-marker *ngFor="let markerPosition of markerPositions"
+              [position]="markerPosition"
+              [options]="markerOptions"></map-marker>
+</google-map>
