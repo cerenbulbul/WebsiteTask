@@ -20,6 +20,8 @@ export class FormDialogComponentComponent implements OnInit {
   zoom = 2;
   markerOptions: google.maps.MarkerOptions = { draggable: false };
   markerPositions: google.maps.LatLngLiteral[] = [];
+  Users: any;
+
 
   //New Users information
   newUserForm = this.fb.group({
@@ -29,13 +31,20 @@ export class FormDialogComponentComponent implements OnInit {
   });
 
   getUserInformation() {
+    this.UserService.getUsers().subscribe(res => {
+      this.Users = res
+    })
+
+    console.log(this.Users.length)
     this.UserService.createUsers({
       'Address': this.address,
       'Size': this.newUserForm.value.Size,
       'Year': this.newUserForm.value.Year,
       'lat': this.userLatitude,
       'lng': this.userLongitude
-    });
+    }, this.Users.length);
+
+    
 
     this.UserService.createMap({
       'lat': this.userLatitude,
@@ -56,6 +65,9 @@ export class FormDialogComponentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.UserService.getUsers().subscribe(res => {
+      this.Users = res
+    })
   }
 
 }

@@ -34,6 +34,9 @@ export class DashboardComponent implements OnInit {
   address: string = ''
   htmlstring: string = ``;
 
+  lat:any;
+  lng:any;
+
 
   //New Users information
   newUserForm = this.fb.group({
@@ -44,24 +47,6 @@ export class DashboardComponent implements OnInit {
 
   constructor(public UserService: UsersService, private fb: FormBuilder, private dialog: MatDialog) {
 
-  }
-
-
-  getUserInformation() {
-    this.UserService.createUsers({
-      'Address': this.address,
-      'Size': this.newUserForm.value.Size,
-      'Year': this.newUserForm.value.Year,
-      'lat': this.userLatitude,
-      'lng': this.userLongitude
-    });
-
-    this.UserService.createMap({
-      'lat': this.userLatitude,
-      'lng': this.userLongitude
-    })
-
-    this.Toast = true;
   }
 
   openAddDialog() {
@@ -86,9 +71,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.UserService.getUsers().subscribe(res => {
-      console.log("res", res)
       this.Users = res
-      console.log(this.Users)
       this.htmlstring = ``
       for (let i = 0; i < res.length; i++) {
         let item = i +1;
@@ -100,11 +83,15 @@ export class DashboardComponent implements OnInit {
       }
     })
 
-    this.UserService.getMap().subscribe(res => {
-      console.log("res", res)
+    
+
+    this.UserService.getUsers().subscribe(res => {
       this.MapMark = res
       for (let i = 0; i < res.length; i++) {
-        this.markerPositions.push(this.MapMark[i])
+        this.markerPositions.push({
+          'lat': this.MapMark[i].lat,
+          'lng': this.MapMark[i].lng
+        })
       }
     })
   }

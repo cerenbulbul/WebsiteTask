@@ -26,21 +26,18 @@ export class UsersService {
   MapInformation: any
   length: any
 
-  createUsers(UsersInformation: any) {
+  createUsers(UsersInformation: any, length:number) {
+    let len = length+1
 
-    this.getUsers().subscribe(res => {
-      this.length = res.length + 1
-    }) 
-    
     return new Promise<any>((resolve, reject) => {
       this.firestore
         .collection("users")
-        .doc("User" + this.length)
+        .doc("User" + len)
         .set(UsersInformation)
         .then(res => { }, err => reject(err));
     });
 
-    
+
   }
 
   deleteUsers(Number: number) {
@@ -59,4 +56,6 @@ export class UsersService {
         .then(res => { }, err => reject(err));
     });
   }
+
+
 }
