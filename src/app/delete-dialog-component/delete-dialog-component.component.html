@@ -1,0 +1,91 @@
+<html>
+
+<body>
+
+    <h2 mat-dialog-title class="title">Delete Features</h2>
+    <mat-dialog-content>
+
+        <form class="form" [formGroup]="deleteUser">
+
+            <div class="form-input">
+                <label class="label" style="margin-left: 10px;" for="Number">User Number: </label>
+                <input style="margin-top: 10px;" class="input" id="Number" type="number" formControlName="Number">
+            </div>
+
+
+        </form>
+
+    </mat-dialog-content>
+    <mat-dialog-actions class="buttons">
+        <button class="cancel-button" mat-button mat-dialog-close>Cancel</button>
+        <button class="submit-button" (click)="DeleteUserInformation()" type="submit"
+            [disabled]="!deleteUser.valid">Delete</button>
+    </mat-dialog-actions>
+
+
+</body>
+
+<style>
+    .body {
+        background-color: #fff;
+        align-items: center;
+        width: 300px;
+    }
+
+    .title {
+        text-align: center;
+        margin-top: 20px;
+        font-weight: 500;
+        color: #ca3333;
+    }
+
+    .form {
+        margin-top: 10px;
+        padding: 20px;
+        justify-content: center;
+    }
+
+    .form-input {
+        margin-top: 20px;
+        width: 150px;
+    }
+
+    .label {
+        font-weight: 300;
+        color: gray;
+    }
+
+    .input {
+        padding: 10px;
+        border-left: 5px solid #ca3333;
+        border-radius: 2em;
+        border-color: #ca3333;
+        border-width: 5px;
+        color: #000;
+    }
+
+    .buttons {
+        justify-content: space-around;
+    }
+
+    .cancel-button {
+        background-color: #fff;
+        border-color: #ca3333;
+        border-width: 5px;
+        border-radius: 2em;
+        padding-left: 10px;
+        padding-right: 10px;
+        color: #ca3333;
+    }
+
+    .submit-button {
+        background-color: #ca3333;
+        border-color: #ca3333;
+        border-width: 5px;
+        border-radius: 2em;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+</style>
+
+</html>

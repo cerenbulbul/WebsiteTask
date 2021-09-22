@@ -1,0 +1,107 @@
+<html>
+
+<body>
+
+    <h2 mat-dialog-title class="title">Add New Features</h2>
+    <mat-dialog-content>
+
+        <form class="form" [formGroup]="newUserForm">
+
+            <div class="form-input">
+                <label class="label" for="Address">Addr: </label>
+                <input class="input" id="Address" type="text" formControlName="Address" autocomplete="yes"
+                    ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places"
+                    (onAddressChange)="handleAddressChange($event)">
+            </div>
+
+
+
+            <div class="form-input">
+                <label class="label" for="Size">Size: </label>
+                <input class="input" id="Size" type="text" formControlName="Size">
+            </div>
+
+            <div class="form-input">
+                <label class="label" for="Year">Year: </label>
+                <input class="input" id="Year" type="text" formControlName="Year">
+            </div>
+
+
+
+
+
+        </form>
+
+    </mat-dialog-content>
+    <mat-dialog-actions class="buttons">
+        <button class="cancel-button" mat-button mat-dialog-close>Cancel</button>
+        <button class="submit-button" (click)="getUserInformation()" type="submit"
+            [disabled]="!newUserForm.valid">Submit</button>
+    </mat-dialog-actions>
+
+
+</body>
+
+<style>
+    .body {
+        background-color: #fff;
+        align-items: center;
+        width: 300px;
+    }
+
+    .title {
+        text-align: center;
+        margin-top: 20px;
+        font-weight: 500;
+        color: #33CA7F;
+    }
+
+    .form {
+        margin-top: 10px;
+        padding: 20px;
+        justify-content: center;
+    }
+
+    .form-input {
+        margin-top: 20px;
+    }
+
+    .label {
+        font-weight: 300;
+        color: gray;
+    }
+
+    .input {
+        padding: 10px;
+        border-left: 5px solid #33CA7F;
+        border-radius: 2em;
+        border-color: #7DCFB6;
+        border-width: 5px;
+        color: #000;
+    }
+
+    .buttons {
+        justify-content: space-around;
+    }
+
+    .cancel-button {
+        background-color: #fff;
+        border-color: #7DCFB6;
+        border-width: 5px;
+        border-radius: 2em;
+        padding-left: 10px;
+        padding-right: 10px;
+        color: #7DCFB6;
+    }
+
+    .submit-button {
+        background-color: #7DCFB6;
+        border-color: #7DCFB6;
+        border-width: 5px;
+        border-radius: 2em;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+</style>
+
+</html>

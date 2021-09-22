@@ -1,30 +1,228 @@
-<form [formGroup]="newUserForm">
+<html>
 
-    <label for="Address">Address: </label>
-    <!-- <input id="Address" type="text" formControlName="Address" > -->
-    <input id="Address" type="text" formControlName="Address" autocomplete="yes" ngx-google-places-autocomplete
-        [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)">
+<link rel="stylesheet" href="https://necolas.github.io/normalize.css/3.0.2/normalize.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,700&subset=latin,latin-ext">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="fullbody">
+    <div class="profile">
+        <img src = "https://caala.de/wp-content/uploads/2017/08/CAALA_logo_blue.svg" alt="My Happy SVG"/>
+
+        <div style="margin-top: 70px;">
+            <div class="profile-information">
+                <i class="fa fa-home"></i>
+                <a style="margin-left: 10px;">Overviews</a>
+            </div>
+    
+            <div class="profile-information">
+                <i class="fa fa-folder-open"></i>
+                <a style="margin-left: 10px;">Oders</a>
+            </div>
+    
+            <div class="profile-information">
+                <i class="fa fa-user"></i>
+                <a style="margin-left: 10px;">Customers</a>
+            </div>
+
+            <div class="profile-information">
+                <i class="fa fa-bars"></i>
+                <a style="margin-left: 10px;">Menus</a>
+            </div>
+
+            <div class="profile-information">
+                <i class="fa fa-archive"></i>
+                <a style="margin-left: 10px;">Packages</a>
+            </div>
+
+            <div class="profile-information">
+                <i class="fa fa-envelope"></i>
+                <a style="margin-left: 10px;">Messages</a>
+            </div>
+
+            <div class="profile-information">
+                <i class="fa fa-cog"></i>
+                <a style="margin-left: 10px;">Settings</a>
+            </div>
+
+        </div>
+
+        <button href="something" class="button-add" (click)="openAddDialog()"> + Add Features</button>
+        
+        <button href="something" class="button-delete" (click)="openDeleteDialog()"> - Delete Feature</button>
 
 
-    <!-- <mat-search-google-maps-autocomplete formControlName="Address">
-    </mat-search-google-maps-autocomplete> -->
+    </div>
 
-    <label for="Size">Size: </label>
-    <input id="Size" type="text" formControlName="Size">
+    <div class="dashboard">
 
-    <label for="Year">Year: </label>
-    <input id="Year" type="text" formControlName="Year">
 
-    <button (click)="getUserInformation()" type="submit" [disabled]="!newUserForm.valid">Submit</button>
 
-</form>
+        <div class="wrapper" [innerHTML]="htmlstring"></div>
 
-<google-map height="400px"
-            width="750px"
-            [center]="center"
-            [zoom]="zoom"
-            (mapClick)="addMarker($event)">
-  <map-marker *ngFor="let markerPosition of markerPositions"
-              [position]="markerPosition"
-              [options]="markerOptions"></map-marker>
-</google-map>
+        <div style="margin-top: 50px; margin-left: 250px;">
+
+            <google-map height="230px" width="450px" [center]="center" [zoom]="zoom">
+                <map-marker *ngFor="let markerPosition of markerPositions" [position]="markerPosition"
+                    [options]="markerOptions"></map-marker>
+            </google-map>
+
+        </div>
+
+
+
+    </div>
+</div>
+
+
+
+<!--/.container-->
+
+
+<style>
+    /*
+    * This is not complete design, it needed to be fixed, especially rwd.
+    */
+
+    /* basic style */
+  
+
+    .dashboard {
+        padding: 30px;
+        background-color: #fff;
+    }
+
+    .fullbody {
+        display: flex;
+        flex-direction: row;
+        width: 93%;
+        height: 88%;
+        padding: 50px;
+        background: linear-gradient(80deg, rgba(65, 165, 178, 1) 0%, rgba(92, 184, 189, 1) 30%, rgba(130, 205, 207, 1) 60%, rgba(169, 224, 222, 1) 90%, rgba(255, 255, 255, 1) 100%);
+    }
+
+    .profile {
+        background-color: #ffffff80;
+        width: 250px;
+        height: auto;
+        padding: 20px;
+        align-items: center;
+        text-align: center;
+        font-size: large;
+
+    }
+
+    .profile-information{
+        display: flex;
+        flex-direction: row;
+        margin-top: 20px;
+        height: auto;
+        margin-left: 30px;
+    }
+
+    .container {
+        margin-left: 20px;
+    }
+
+
+
+
+    .wrapper {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        grid-auto-rows: minmax(100px, auto);
+        padding: 10px;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .item {
+        padding: 10px;
+        color: #fff;
+        text-align: center;
+        border-radius: 2em;
+        background: linear-gradient(180deg, rgba(252, 159, 91, 1) 35%, rgba(251, 209, 162, 1) 100%);
+    }
+
+    .button-add {
+        padding: 0.3em 1.2em;
+        border-radius: 2em;
+        box-sizing: border-box;
+        text-decoration: none;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+        color: #FFFFFF;
+        background-color: #33CA7F;
+        text-align: center;
+        transition: all 0.2s;
+        position: relative;
+        padding: 10px;
+        border-width: 0ch;
+        margin-top: 50px;
+    }
+
+    .button-add:hover {
+        background-color: #33ca7e61;
+    }
+
+    .button-delete {
+        padding: 0.3em 1.2em;
+        border-radius: 2em;
+        box-sizing: border-box;
+        text-decoration: none;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+        color: #FFFFFF;
+        background-color: #ca3333;
+        text-align: center;
+        transition: all 0.2s;
+        position: relative;
+        padding: 10px;
+        border-width: 0ch;
+        margin-top: 10px;
+    }
+
+    .button-delete:hover {
+        background-color: #ca333382;
+    }
+
+    @media all and (max-width:30em) {
+        .button {
+            display: block;
+            margin: 0.2em auto;
+        }
+    }
+
+    /* responsive */
+    @media screen and (max-width: 677px) {
+        .container {
+            width: 80%;
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+        .container {
+            width: 90%;
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        .container {
+            width: 750px;
+        }
+    }
+
+    @media screen and (min-width: 992px) {
+        .container {
+            width: 960px;
+        }
+    }
+
+    @media screen and (min-width: 1200px) {
+        .container {
+            width: 1170px;
+        }
+    }
+</style>
+
+</html>

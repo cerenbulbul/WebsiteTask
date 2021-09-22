@@ -7,35 +7,56 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 })
 export class UsersService {
 
-  constructor( private firestore: AngularFirestore ) { }
+  constructor(private firestore: AngularFirestore) { }
+
+  getFireStore() {
+    return this.firestore.collection("users").get();
+  }
 
 
-getUsers() { 
-  return this.firestore.collection("users").valueChanges();
-}
+  getUsers() {
+    return this.firestore.collection("users").valueChanges();
+  }
 
-getMap() { 
-  return this.firestore.collection("map").valueChanges();
-}
+  getMap() {
+    return this.firestore.collection("map").valueChanges();
+  }
 
-UsersInformation:any
-MapInformation:any
+  UsersInformation: any
+  MapInformation: any
+  length: any
 
-createUsers(UsersInformation:any) {
-  return new Promise<any>((resolve, reject) =>{
+  createUsers(UsersInformation: any) {
+
+    this.getUsers().subscribe(res => {
+      this.length = res.length + 1
+    }) 
+    
+    return new Promise<any>((resolve, reject) => {
       this.firestore
-          .collection("users")
-          .add(UsersInformation)
-          .then(res => {}, err => reject(err));
-  });
-}
+        .collection("users")
+        .doc("User" + this.length)
+        .set(UsersInformation)
+        .then(res => { }, err => reject(err));
+    });
 
-createMap(MapInformation:any) {
-  return new Promise<any>((resolve, reject) =>{
+    
+  }
+
+  deleteUsers(Number: number) {
+    console.log(Number)
+    return this.firestore
+      .collection("users")
+      .doc('User' + Number)
+      .delete();
+  }
+
+  createMap(MapInformation: any) {
+    return new Promise<any>((resolve, reject) => {
       this.firestore
-          .collection("map")
-          .add(MapInformation)
-          .then(res => {}, err => reject(err));
-  });
-}
+        .collection("map")
+        .add(MapInformation)
+        .then(res => { }, err => reject(err));
+    });
+  }
 }

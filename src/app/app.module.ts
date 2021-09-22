@@ -18,11 +18,18 @@ import { AngularFireModule} from '@angular/fire/compat'
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormDialogComponentComponent } from './form-dialog-component/form-dialog-component.component';
+import { DeleteDialogComponentComponent } from './delete-dialog-component/delete-dialog-component.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    UserListComponent
+    UserListComponent,
+    FormDialogComponentComponent,
+    DeleteDialogComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -34,13 +41,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     GooglePlaceModule,
     GoogleMapsModule,
- 
-    // AgmCoreModule.forRoot({
-    //   apiKey: 'AIzaSyB6_e54XpVCFRIbTbnO_v5HfLZzJKhtHPE',
-    //   libraries: ['places']
-    // }),
-    // MatGoogleMapsAutocompleteModule,
-    
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
